@@ -38,7 +38,7 @@
         <button class="selection-favorites selection-button">Favorites</button>
     </div>
     <div class="user-section">
-        <div class="user-lists show">
+        <div class="user-lists {% if request.args.get("fav") %}hide{% else %}show{% endif%}">
             {% for list in lists %}
                 <a href="/list/{{list.id}}">
                     <div class="user-list">
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="user-section">
-        <div class="user-favorites hide">
+        <div class="user-favorites {% if request.args.get("fav") %}show{% else %}hide{% endif%}">
             {% for favorite in favorites %}
                 <a href="/movie/{{favorite.movie_id}}">
                     <div class="user-favorite">

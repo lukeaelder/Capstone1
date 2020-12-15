@@ -9,7 +9,7 @@ db.create_all()
 
 app.config['WTF_CSRF_ENABLED'] = False
 
-class UserModelTestCase(TestCase):
+class UserFunctionTestCase(TestCase):
     """Test model for user."""
 
     def setUp(self):

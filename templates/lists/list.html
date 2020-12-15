@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/list.css">
+{% endblock %}
+{% block content %}
+<div class="created-list">
+    <div class="created-list-banner">
+        <h1>{{list.title}}
+        <span class="created-user">By <a href="/user/{{user[0]}}">{{user[0]}}</a></span>
+        <span class="created-list-time">Created {{list.created|datetimeformat('%b %d, %Y')}}</span>
+        <span class="created-list-description">{{list.description}}</span></h1>
+    </div>
+    <div class="created-list-movies">
+        {% for movie in movies %}
+        <a href="/movie/{{movie.movie_id}}">
+            <div class="created-list-movie">
+                <img src="{% if movie.poster_image %}https://image.tmdb.org/t/p/w500{{movie.poster_image}}{% else %}/static/images/no-image.JPG{% endif %}" alt="" class="created-list-poster">
+                <p>{{movie.title}}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

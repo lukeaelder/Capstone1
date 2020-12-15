@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/user.css">
+{% endblock %}
+{% block content %}
+<div class="list-section">
+    <div class="list-banner">
+        <h2>All Lists</h2>
+    </div>
+    <div class="all-list">
+        {% for list in lists %}
+            <a href="/list/{{list.id}}">
+                <div class="user-list">
+                    {% if list.image %}
+                        <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{list.image}}" alt="" class="list-image">
+                    {% else %}
+                        <div class="no-list-image"></div>
+                    {% endif %}
+                    <p class="list-title">{{list.title}}</p>
+                    <p class="list-created">Created {{list.created|datetimeformat('%b %d, %Y')}}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

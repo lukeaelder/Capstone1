@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/movie-home.css">
+{% endblock %}
+{% block content %}
+<div class="main">
+    <a href="/movies/upcoming">
+        <h2>Upcoming Movies <i class="fas fa-angle-double-right"></i></h2>
+    </a>
+    <div class="movie-posters upcoming-movies">
+        {% for movie in upcoming %}
+            {% if loop.index <= 15 %}
+                <a href="/movie/{{movie["id"]}}">
+                    <div class="movie-card">
+                        {% if movie["vote_average"] != 0 and movie["vote_average"] %}
+                            <div class="rating color{{movie['vote_average']|round(0)|int}}">
+                                <p>{{movie["vote_average"]}}</p>
+                            </div>
+                            {% else %}
+                            <div class="rating color0">
+                                <p>NR</p>
+                            </div>
+                        {% endif %}
+                        <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{movie["poster_path"]}}" alt="" class="movie-poster">
+                        <p class="movie-title">{{movie["title"]}}</p>
+                        <p class="release-date">{{movie["release_date"]}}</p>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+        <a href="/movies/upcoming">
+            <div class="movie-card-more">
+                <p class="movies-more">View More <i class="fas fa-arrow-right"></i></p>
+            </div>
+        </a>
+    </div>
+    <a href="/movies/now_playing">
+        <h2>Movies Playing Now <i class="fas fa-angle-double-right"></i></h2>
+    </a>
+    <div class="movie-posters now-playing-movies">
+        {% for movie in playing %}
+            {% if loop.index <= 15 %}
+                <a href="/movie/{{movie["id"]}}">
+                    <div class="movie-card">
+                        {% if movie["vote_average"] != 0 and movie["vote_average"] %}
+                            <div class="rating color{{movie['vote_average']|round(0)|int}}">
+                                <p>{{movie["vote_average"]}}</p>
+                            </div>
+                            {% else %}
+                            <div class="rating color0">
+                                <p>NR</p>
+                            </div>
+                        {% endif %}
+                        <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{movie["poster_path"]}}" alt="" class="movie-poster">
+                        <p class="movie-title">{{movie["title"]}}</p>
+                        <p class="release-date">{{movie["release_date"]}}</p>
+                    </div>   
+                </a>
+            {% endif %}
+        {% endfor %}
+        <a href="/movies/now_playing">
+            <div class="movie-card-more">
+                <p class="movies-more">View More <i class="fas fa-arrow-right"></i></p>
+            </div>
+        </a>
+    </div>
+    <a href="/movies/top_rated">
+        <h2>Top Rated Movies <i class="fas fa-angle-double-right"></i></h2>
+    </a>
+    <div class="movie-posters top-rated-movies">
+        {% for movie in toprated %}
+            {% if loop.index <= 15 %}
+                <a href="/movie/{{movie["id"]}}">
+                    <div class="movie-card">
+                        {% if movie["vote_average"] != 0 and movie["vote_average"] %}
+                            <div class="rating color{{movie['vote_average']|round(0)|int}}">
+                                <p>{{movie["vote_average"]}}</p>
+                            </div>
+                            {% else %}
+                            <div class="rating color0">
+                                <p>NR</p>
+                            </div>
+                        {% endif %}
+                        <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{movie["poster_path"]}}" alt="" class="movie-poster">
+                        <p class="movie-title">{{movie["title"]}}</p>
+                        <p class="release-date">{{movie["release_date"]}}</p>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+        <a href="/movies/top_rated">
+            <div class="movie-card-more">
+                <p class="movies-more">View More <i class="fas fa-arrow-right"></i></p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

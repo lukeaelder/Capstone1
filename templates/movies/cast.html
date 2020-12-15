@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/cast.css">
+{% endblock %}
+{% block content %}
+    <div class="cast-banner">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original{{movie["poster_path"]}}" alt="" class="banner-image">
+        <p class="banner-title">{{movie["title"]}}</p>
+    </div>
+    <div class="main">
+        <h2 class="cast-title">Cast ({{credits["cast"]|length}})</h2>
+        <div class="cast">
+            {% for cast in credits["cast"] %}
+                <div class="member">
+                    {% if cast["profile_path"] %}
+                    <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{cast["profile_path"]}}" alt="" class="img">
+                    {% else %}
+                    <img loading="lazy" src="/static/images/no-image.JPG" alt="" class="img">
+                    {% endif %}
+                    <div class="text">
+                        <p class="name">{{cast["name"]}}</p>
+                        <p class="role">{{cast["character"]}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h2 class="crew-title">Crew ({{credits["crew"]|length}})</h2>
+        <div class="crew">
+            {% for crew in credits["crew"] %}
+                <div class="member">
+                    {% if crew["profile_path"] %}
+                    <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{crew["profile_path"]}}" alt="" class="img">
+                    {% else %}
+                    <img loading="lazy" src="/static/images/no-image.JPG" alt="" class="img">
+                    {% endif %}
+                    <div class="text">
+                        <p class="name">{{crew["name"]}}</p>
+                        <p class="role">{{crew["job"]}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,447 @@
+.user-form {
+    margin-left: 5rem;
+    text-align: center;
+}
+
+.user-form h2 {
+    margin: 0;
+    padding: 52px 0;
+    font-size: 3rem;
+    font-weight: normal;
+    background-image: linear-gradient(to top right, rgb(128, 26, 212), rgb(45,26,212));
+    color: white;
+}
+
+.user-form input, textarea {
+    width: 40%;
+    margin: 2rem auto;
+    display: flex;
+    height: 3rem;
+    border: 1px solid rgb(30,30,30);
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 0 0 0 30px;
+    max-width: 40%;
+    min-width: 400px;
+    max-height: 400px;
+    min-height: 3rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.user-form textarea {
+    padding-top: 10px;
+}
+
+.user-form button {
+    width: 10%;
+    height: 3rem;
+    border: 1px solid rgb(30,30,30);
+    border-radius: 10px;
+    font-size: 1rem;
+    background-image: linear-gradient(to top right, rgb(73, 214, 45), rgb(12, 223, 213));
+    color: black;
+}
+
+.user-form h3 {
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.user-form h3 a {
+    border: 1px solid rgb(190,190,190);
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.user-profile {
+    margin-left: 5rem;
+    width: 100%;
+}
+
+.user-banner {
+    display: flex;
+    background-image: linear-gradient(to top right, rgb(128, 26, 212), rgb(45,26,212));
+    height: 250px;
+    justify-content: center;
+    min-width: 1050px;
+}
+
+.user-image {
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 200px;
+    height: 200px;
+    margin: 25px 0 0 0;
+    object-fit: cover;
+}
+
+.user-banner-text {
+    display: block;
+}
+
+.user-username {
+    font-size: 2rem;
+    color: white;
+    margin: 3rem 0 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.user-username a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.edit-profile-button {
+    margin-left: 20px;
+    border-radius: 5px;
+    border: 2px solid white;
+    padding: 5px;
+    color: black;
+    background-image: linear-gradient(to top right, rgb(73, 214, 45), rgb(12, 223, 213));
+}
+
+.user-join-date {
+    font-size: 1rem;
+    color: rgb(200,200,200);
+    margin: 0 0 1rem 2rem;
+}
+
+.user-bio {
+    font-size: 1rem;
+    color: white;
+    margin: 0 0 1rem 2rem;
+    width: 300px;
+}
+
+.user-banner-extra {
+    width: 400px;
+    display: flex;
+    padding-top: 3.5rem;
+    margin-right: 100px;
+}
+
+.user-extra-title {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.user-extra-info {
+    margin: 0.5rem auto;
+    border: 2px solid white;
+    background-image: linear-gradient(to top right, rgb(60,60,60), rgb(90,90,90));
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.user-extra-section {
+    width: 200px;
+    text-align: center;
+}
+
+.selection-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+    margin-bottom: 30px;
+    border: 1px solid rgb(200,200,200);
+}
+
+.selection-button {
+    font-size: 1.1rem;
+    font-weight: lighter;
+    padding: 4px;
+    border: none;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    width: 100px;
+}
+
+.selection-button:hover {
+    background-color: rgb(220,220,220);
+}
+
+.selection-favorites {
+    margin: 0 5.8rem 0 2rem;
+}
+
+.hide > a, .hide{
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.user-favorites{
+    width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.user-favorites a {
+    text-decoration: none;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.user-section {
+    display: flex;
+    justify-content: center;
+    padding-right: 5rem;
+    min-width: 1000px;
+}
+
+.favorite-image {
+    width: 100%;
+    border-radius: 10px;
+    height: 132.06px;
+    object-fit: cover;
+}
+
+.favorite-text {
+    display: block;
+}
+
+.favorite-title {
+    margin: 0;
+    font-size: 1.1rem;
+    color: black;
+}
+
+.watchlist {
+    width: auto;
+    margin: 4rem 5rem 0 5rem;
+    display: block;
+    justify-content: center;
+    min-width: 1000px;
+}
+
+.watchlist a {
+    text-decoration: none;
+}
+
+.watchlist-movie {
+    display: flex;
+    border: 2px solid rgb(210,210,210);
+    border-radius: 13px;
+    height: 230px;
+    margin: 2rem auto;
+    width: 1000px;
+    overflow-x: hidden;
+}
+
+.watchlist-text {
+    width: 580px;
+    margin-left: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+
+.watchlist-image {
+    border-radius: 10px;
+    height: 230px;
+}
+
+.watchlist-banner {
+    margin-left: 5rem;
+    text-align: center;
+    min-width: 800px;
+}
+
+.watchlist-banner h2 {
+    margin: 0;
+    padding: 52px 0;
+    font-size: 3rem;
+    font-weight: normal;
+    background-image: linear-gradient(to top right, rgb(128, 26, 212), rgb(45,26,212));
+    color: white;
+}
+
+.watchlist-remove-a {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.watchlist-remove {
+    background-image: linear-gradient(to top right, rgb(243, 114, 40), rgb(255, 50, 50));
+    color: white;
+    width: 100px;
+    border-radius: 10px;
+    padding: 3px;
+    text-align: center;
+}
+
+.watchlist-top {
+    display: flex;
+    margin: 10px 0;
+}
+
+.watchlist-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: black;
+}
+
+.watchlist-year {
+    font-size: 0.9rem;
+    margin: 7px 0 0 10px;
+    color: rgb(60,60,60);
+}
+
+.watchlist-overview {
+    color: black;
+}
+
+.user-lists {
+    width: 850px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.user-list {
+    width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.list-image {
+    width: 400px;
+    border-radius: 10px;
+    filter: brightness(90%);
+}
+
+.no-list-image {
+    width: 400px;
+    height: 224.8px;
+    border-radius: 10px;
+    background-image: linear-gradient(to top right, rgb(236, 139, 59), rgb(243, 57, 44));
+}
+
+.list-title {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    text-shadow: 2px 2px 3px black;
+    font-size: 2rem;
+    color: white;
+}
+
+.list-created {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    text-shadow: 2px 2px 3px black;
+    font-size: 0.9rem;
+    color: rgb(230,230,230);
+}
+
+.list-section {
+    margin: 0 0 0 5rem;
+    padding-right: 5rem;
+    width: 97%;
+}
+
+.all-list {
+    margin: 5rem auto 0 auto;
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.list-banner {
+    text-align: center;
+}
+
+.list-banner h2 {
+    margin: 0;
+    padding: 52px 0;
+    font-size: 3rem;
+    font-weight: normal;
+    background-image: linear-gradient(to top right, rgb(128, 26, 212), rgb(45,26,212));
+    color: white;
+}
+
+.reviews {
+    margin: 2rem 0 5rem 5rem;
+}
+
+.review {
+    display: block;
+    width: 35%;
+    min-width: 500px;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    border: 2px solid rgb(210,210,210);
+    border-radius: 10px;
+}
+
+.review-top {
+    display: flex;
+    line-height: 30px;
+}
+
+.review-body {
+    display: flex;
+}
+
+.review-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 10px 0 0;
+}
+
+.review-rating {
+    font-size: 1rem;
+    margin: 0 20px 0 0;
+}
+
+.review-date{
+    font-size: 0.9rem;
+    margin: 0 10px 0 0;
+    color: rgb(60,60,60);
+}
+
+.review-name {
+    font-size: 0.9rem;
+    margin: 0 20px 0 0;
+    color: rgb(60,60,60);
+}
+
+.user-reviews {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 30px;
+}
+
+.delete-review {
+    transform: translateY(-5px);
+    border-radius: 5px;
+    background-image: linear-gradient(to top right, rgb(236, 139, 59), rgb(243, 57, 44));
+    color: white;
+}

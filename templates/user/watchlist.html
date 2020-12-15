@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/user.css">
+{% endblock %}
+{% block content %}
+<div class="watchlist-banner">
+    <h2 class="watchlist-message">{% if watchlist %}Your Watchlist{% else %}You have no movies in your watchlist{% endif %}</h2>
+</div>
+<div class="watchlist">
+    {% for movie in watchlist %}
+        <a href="/movie/{{movie.movie_id}}">
+            <div class="watchlist-movie">
+                <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_image}}" alt="" class="watchlist-image">
+                <div class="watchlist-text">
+                    <div class="watchlist-top">
+                        <p class="watchlist-title">{{movie.title}}</p>
+                        <p class="watchlist-year">{{movie.year}}</p>
+                    </div>
+                    <p class="watchlist-overview">{{movie.overview}}</p>
+                    <a href="/movie/{{movie.movie_id}}/watchlist/remove" class="watchlist-remove-a">
+                        <p class="watchlist-remove">Remove</p>
+                    </a>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

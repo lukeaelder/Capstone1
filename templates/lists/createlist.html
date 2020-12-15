@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/list.css">
+{% endblock %}
+{% block content %}
+<div class="list-main">
+    <div class="list-banner">
+        <h1>Create List</h1>
+    </div>
+    <div class="list-info">
+        <form class="list-form">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+                {{ field(placeholder=field.label.text) }}
+            {% endfor %}
+        </form>
+    </div>
+    <div class="list-searchbar">
+        <input type="text" placeholder="Search for movie" class="list-search">
+        <div class="list-search-results">
+        </div>
+    </div>
+    <div class="list-movies">
+        <div class="grid">
+        </div>
+    </div>
+    <div class="create-list">
+        <button class="create-list-button">Create List</button>
+    </div>
+    <p class="list-errors"></p>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations.min.js" integrity="sha512-oAY57i8MXmaOP7pAylNLnULAM4QLV3uGnvnXVY4zF229/zFzTvG2/5YIgH8iN8oZR2hnbkiDPd4JCJGaH4oG6g==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.3/dist/muuri.min.js"></script>
+
+{% endblock %}

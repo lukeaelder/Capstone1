@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://unpkg.com/jquery"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/static/stylesheets/navbar.css">
+    {% endblock %}
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <a href="/" class="nav-logo">
+                <li class="logo nav-logo">
+                    <img src="/static/images/logo.png" alt="Logo">
+                </li>
+            </a>
+            <li class="nav-item nav-search" id="searchbar">
+                <a class="nav-link">
+                    <form action="/search" class="search-form" method="POST"> 
+                        <input type="text" class="searchbar" placeholder="Search for movie" name="search">
+                    </form>
+                    <i class="fas fa-search searchbar-icon"></i>
+                </a>
+            </li>
+            {% if g.user %}
+            <li class="nav-item nav-menu">
+                <a class="nav-link">
+                    <div class="navbar-icon">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <span class="link-text">Menu</span>
+                </a>
+            </li>
+            <div class="nav-menu-dropdown dropdown-closed">
+                <li class="dropdown-item">
+                    <a href="/" class="dropdown-link">
+                        <span class="dropdown-title"><i class="fas fa-film"></i> Movies</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/movies/upcoming" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Upcoming</span>
+                    </a>
+                    <a href="/movies/popular" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Popular</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/movies/now_playing" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Now Playing</span>
+                    </a>
+                    <a href="/movies/top_rated" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Top Rated</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="/lists" class="dropdown-link">
+                        <span class="dropdown-title"><i class="fas fa-list-ul"></i> Lists</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/list/new" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Create List</span>
+                    </a>
+                    <a href="/user/{{g.user.username}}" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Your List</span>
+                    </a>
+                </li>
+            </div>
+            <li class="nav-item nav-favorites">
+                <a href="/user/{{g.user.username}}" class="nav-link">
+                    <div class="navbar-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <span class="link-text">Favorites</span>
+                </a>
+            </li>
+            <li class="nav-item nav-bookmarks">
+                <a href="/watchlist" class="nav-link">
+                    <div class="navbar-icon">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <span class="link-text">Watchlist</span>
+                </a>
+            </li>
+            <li class="nav-item nav-profile">
+                <a class="nav-link" href="/user/{{g.user.username}}">
+                    <div class="navbar-user-image-div">
+                        <img src="{% if g.user.image_url %}{{g.user.image_url}}{% else %}/static/images/no-profile-image.jpg{% endif %}" alt="" class="navbar-user-image">
+                    </div>
+                    <span class="link-text">{{ g.user.username }}</span>
+                </a>
+            </li>
+            <div class="nav-profile-dropdown dropdown-closed">
+                <li class="dropdown-sub-item">
+                    <a href="/user/{{g.user.username}}" class="dropdown-sub">
+                        <span class="dropdown-sub-link">View Profile</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/user/{{g.user.username}}/edit" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Edit Profile</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/reviews" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Reviews</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/logout" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Logout</span>
+                    </a>
+                </li>
+            </div>
+            {% else %}
+            <div class="navbar-login-signup">
+                <a href="/signup">
+                    <button class="ls-button">Signup</button>
+                </a>
+                <a href="/login">
+                    <button class="ls-button">Login</button>
+                </a>
+            </div>
+            <li class="nav-item nav-menu">
+                <a class="nav-link">
+                    <div class="navbar-icon">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <span class="link-text">Menu</span>
+                </a>
+            </li>
+            <div class="nav-menu-dropdown dropdown-closed">
+                <li class="dropdown-item">
+                    <a href="/" class="dropdown-link">
+                        <span class="dropdown-title"><i class="fas fa-film"></i> Movies</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/movies/upcoming" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Upcoming</span>
+                    </a>
+                    <a href="/movies/popular" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Popular</span>
+                    </a>
+                </li>
+                <li class="dropdown-sub-item">
+                    <a href="/movies/now_playing" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Now Playing</span>
+                    </a>
+                    <a href="/movies/top_rated" class="dropdown-sub">
+                        <span class="dropdown-sub-link">Top Rated</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="/lists" class="dropdown-link">
+                        <span class="dropdown-title"><i class="fas fa-list-ul"></i> Lists</span>
+                    </a>
+                </li>
+            </div>
+            {% endif %}
+            <li class="nav-item nav-settings">
+                <a href="" class="nav-link">
+                    <div class="navbar-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flashes">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="/static/javascript/app.js"></script>
+
+</body>
+</html>

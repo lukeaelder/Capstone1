@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/user.css">
+{% endblock %}
+{% block content %}
+<div class="user-profile">
+    <div class="user-banner">
+        <img loading="lazy" src="{% if user.image_url %}{{user.image_url}}{% else %}/static/images/no-profile-image.jpg{% endif %}" alt="" class="user-image">
+        <div class="user-banner-text">
+            <p class="user-username">{{ user.username }} 
+                {% if g.user.id == user.id %}
+                <a href="/user/{{user.username}}/edit">
+                    <button class="edit-profile-button" action="/users/{{user.username}}/edit">EDIT PROFILE</button>
+                </a>
+                {% endif %}
+            </p>
+            <p class="user-join-date"> Joined {{ user.joined|datetimeformat('%b %d, %Y') }}</p>
+            {% if user.bio %}
+                <p class="user-bio">{{user.bio}}</p>
+            {% else %}
+                <p class="user-bio">No bio</p>
+            {% endif %}
+        </div>
+        <div class="user-banner-extra">
+            <div class="user-extra-section">
+                <p class="user-extra-title">Total Reviews</p>
+                <p class="user-extra-info">{{reviews}}</p>
+            </div>
+            <div class="user-extra-section">
+                <p class="user-extra-title">Total List</p>
+                <p class="user-extra-info">{{lists|length}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="selection-bar">
+        <button class="selection-list selection-button">Lists</button>
+        <button class="selection-favorites selection-button">Favorites</button>
+    </div>
+    <div class="user-section">
+        <div class="user-lists show">
+            {% for list in lists %}
+                <a href="/list/{{list.id}}">
+                    <div class="user-list">
+                        {% if list.image %}
+                            <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{list.image}}" alt="" class="list-image">
+                        {% else %}
+                            <div class="no-list-image"></div>
+                        {% endif %}
+                        <p class="list-title">{{list.title}}</p>
+                        <p class="list-created">Created {{list.created|datetimeformat('%b %d, %Y')}}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="user-section">
+        <div class="user-favorites hide">
+            {% for favorite in favorites %}
+                <a href="/movie/{{favorite.movie_id}}">
+                    <div class="user-favorite">
+                        <img loading="lazy" src="{% if favorite.backdrop_image %}https://image.tmdb.org/t/p/w500/{{favorite.backdrop_image}}{% else %}/static/images/no-image.JPG{% endif %}" alt="" class="favorite-image">
+                        <div class="favorite-text">
+                            <p class="favorite-title">{{favorite.title}}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/user.css">
+{% endblock %}
+{% block content %}
+<div class="user-form">
+    <h2 class="signup-message">Create review for {{movie["title"]}}</h2>
+    <form method="POST" id="user_form">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for error in field.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+        {{ field(placeholder=field.label.text) }}
+        {% endfor %}
+        <button >Submit</button>
+    </form>
+</div>
+{% endblock %}

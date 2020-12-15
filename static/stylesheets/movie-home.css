@@ -1,0 +1,455 @@
+.main {
+    margin-left: 8rem;
+    padding: 1rem;
+}
+
+.movie-poster {
+    width: 150px;
+    border-radius: 10px;
+    min-height: 225px;
+}
+
+.movie-poster-lg {
+    width: 275px;
+    border-radius: 10px;
+    height: 412.5px;
+    object-fit: cover;
+}
+
+.centered {
+    transform: translate(10%, 2rem);
+    width: 75%;
+    min-width: 700px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 290px auto;
+    grid-template-rows: 4rem 2rem 100%;
+}
+
+.movie-poster-full {
+    width: 225px;
+    border-radius: 10px;
+    height: 337.5px;
+    object-fit: cover;
+}
+
+.movie-posters {
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+    width: 95%;
+}
+
+.movie-posters-full {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(100px, auto);
+    width: 95%;
+    height: 80%;
+}
+
+.play-trailer:hover {
+    color: rgb(160,170,160);
+    cursor: pointer;
+}
+
+.movie-posters a, .movie-posters-full a, .recommendations a {
+    text-decoration: none;
+}
+
+.movie-card {
+    margin: 0 1rem 0 1rem;
+    border-radius: 10px;
+}
+
+h2 {
+    font-weight: normal;
+    margin: 2rem 0 0 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.movie-title {
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.release-date {
+    color: rgb(100,100,100);
+    font-size: .9rem;
+    bottom: 0;
+}
+
+.backdrop-image {
+    text-align: left;
+    color: white;
+    font-weight: bold;
+    overflow: hidden;
+    margin-left: 5rem;
+    margin-bottom: 2rem;
+}
+
+.no-backdrop {
+    background-color: rgb(40,40,40);
+}
+
+.backdrop-text {
+    width: 95%;
+    height: 30rem;
+    margin-left: 5rem;
+    top: 0;
+    left: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.centered .movie-title-lg {
+    font-size: 3rem;
+    white-space: nowrap;
+    margin-top: 4rem;
+}
+
+.backdrop-overview {
+    margin: 5rem 0 2rem 0;
+}
+
+.movie-backdrop-image {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+    object-position: 30%;
+    margin: 0;
+    filter: blur(3px) brightness(.5);
+    transform: scale(1.03);
+    z-index: 0;
+    overflow: hidden;
+}
+
+.movie-info {
+    color: rgb(230,230,230);
+    font-weight: lighter;
+    white-space: nowrap;
+    margin-top: 4rem;
+}
+
+.movie-overview .overview {
+    font-size: 1.5rem;
+}
+
+.movie-description {
+    font-weight: normal;
+}
+
+.trailer {
+    margin-left: 5rem;
+}
+
+.videowrapper{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    text-align: center;
+}
+
+.videowrapper iframe{
+    transform: translateY(10%);
+    top: 50%;
+    width: 75%;
+    height: 75%;
+    margin: 0 auto;
+}
+
+.certification {
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 3px;
+    padding: 2px 4px 2px 4px;
+}
+
+.credits, .recommendations {
+    width: 55%;
+    margin-left: 15%;
+    margin-bottom: 2rem;
+}
+
+.blank-recommendations {
+    height: 254px;
+}
+
+.blank-cast {
+    height: 350px;
+}
+
+.movie-section {
+    display: flex;
+    overflow: hidden;
+    overflow-x: scroll;
+    margin-top: 1.5rem;
+}
+
+.credit-member {
+    width: 150px;
+    margin: 0 10px 10px 10px;
+    border: 1px solid rgb(220,220,220);
+    height: auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.credit-member img{
+    width: 150px;
+    border-radius: 10px 10px 0 0;
+    max-height: 175px;
+    overflow: hidden;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    min-height: 175px;
+}
+
+.credit-name {
+    font-weight: bold;
+    margin: 0 .5rem;
+    height: auto;
+}
+
+.credit-character {
+    font-size: .9rem;
+    color: rgb(70,70,70);
+    height: auto;
+    margin: 0rem .5rem .5rem .5rem;
+}
+
+.credit-names {
+    position: relative;
+    height: auto;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 2rem;
+}
+
+.movie-card-more {
+    width: 150px;
+    text-align: center;
+    line-height: 300px;
+}
+
+.movie-more {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.recommendation img {
+    width: 300px;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.recommendation {
+    margin-bottom: 10px;
+}
+
+.recommendation-name {
+    color: black;
+    font-weight: bold;
+    margin: 5px 10px 5px 10px;
+}
+
+.extra-movie-info {
+    margin-left: clamp(785px, 80%, 100%);
+    width: 150px;
+    top: 0;
+    transform: translateY(33rem);
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+}
+
+.movie-bottom {
+    height: 700px;
+    width: 100%;
+    min-width: 1000px;
+}
+
+.movie-bottom a {
+    text-decoration: none;
+}
+
+.main a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.rating {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(60,60,60);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    transform: translate(-1rem, 2rem);  
+    z-index: 4;
+    margin: 0;
+}
+
+.rating p {
+    margin: 0;
+}
+
+.extra-title {
+    font-size: 1.5rem;
+    color: rgb(40,40,40);
+    border-bottom: 2px solid rgb(210,210,210);
+}
+
+.extra-button {
+    text-decoration: none;
+    font-size: 1.5rem;
+    border: 1px solid rgb(210,210,210);
+    border-radius: 5px;
+    padding: 8px;
+    color: black;
+    display: inline-block;
+    text-align: center;
+    width: 25px;
+}
+
+.red-heart {
+    color: rgb(221, 72, 72);
+}
+
+.blue-watchlist {
+    color: rgb(75, 72, 221);
+}
+
+.color0 { color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+.color1 { color: rgb(236, 38, 38);
+    border: 2px solid rgb(236, 38, 38);
+    border-radius: 50%;
+}
+.color2 { color: rgb(211, 71, 36);
+    border: 2px solid rgb(211, 71, 36);
+    border-radius: 50%;
+}
+.color3 { color: rgb(236, 96, 61);
+    border: 2px solid rgb(236, 96, 61);
+    border-radius: 50%;
+}
+.color4 { color: rgb(236, 115, 59);
+    border: 2px solid rgb(236, 115, 59);
+    border-radius: 50%;
+}
+.color5 { color: rgb(236, 180, 59);
+    border: 2px solid rgb(236, 180, 59);
+    border-radius: 50%;
+}
+.color6 { color: rgb(240, 217, 6);
+    border: 2px solid rgb(240, 217, 6);
+    border-radius: 50%;
+}
+.color7 { color: rgb(189, 236, 59);
+    border: 2px solid rgb(189, 236, 59);
+    border-radius: 50%;
+}
+.color8 { color: rgb(153, 236, 59);
+    border: 2px solid rgb(153, 236, 59);
+    border-radius: 50%;
+}
+.color9 { color: rgb(139, 236, 59);
+    border: 2px solid rgb(139, 236, 59);
+    border-radius: 50%;
+}
+.color10 { color: rgb(51, 255, 0);
+    border: 2px solid rgb(51, 255, 0);
+    border-radius: 50%;
+}
+.review-color1 { color: rgb(236, 38, 38);}
+.review-color2 { color: rgb(211, 71, 36);}
+.review-color3 { color: rgb(236, 96, 61);}
+.review-color4 { color: rgb(236, 115, 59);}
+.review-color5 { color: rgb(236, 180, 59);}
+.review-color6 { color: rgb(240, 217, 6);}
+.review-color7 { color: rgb(189, 236, 59);}
+.review-color8 { color: rgb(153, 236, 59);}
+.review-color9 { color: rgb(139, 236, 59);}
+.review-color10 { color: rgb(51, 255, 0);}
+
+.reviews {
+    margin: 0 0 5rem 5rem;
+}
+
+.review {
+    display: block;
+    width: 35%;
+    min-width: 500px;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    border: 2px solid rgb(210,210,210);
+    border-radius: 10px;
+}
+
+.review-top {
+    display: flex;
+    line-height: 30px;
+}
+
+.review-body {
+    display: flex;
+}
+
+.review-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 10px 0 0;
+}
+
+.review-rating {
+    font-size: 1rem;
+    margin: 0 20px 0 0;
+}
+
+.review-date{
+    font-size: 0.9rem;
+    margin: 0 10px 0 0;
+    color: rgb(60,60,60);
+}
+
+.review-name {
+    font-size: 0.9rem;
+    margin: 0 20px 0 0;
+    color: rgb(60,60,60);
+}
+
+.user-reviews {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 30px;
+}
+
+.create-review {
+    width: 100%;
+    text-align: center;
+}
+
+.review-button {
+    margin: 0 0 30px 0;
+    border-radius: 5px;
+    padding: 5px;
+    color: black;
+    background-image: linear-gradient(to top right, rgb(73, 214, 45), rgb(12, 223, 213));
+}

@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/movie-home.css">
+    <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+{% endblock %}
+{% block content %}
+<div class="backdrop-image">
+    {% if movie["backdrop_path"] != None %}
+        <img src="https://image.tmdb.org/t/p/original{{movie["backdrop_path"]}}" alt="" class="movie-backdrop-image">
+    {% else %}
+        <div class="movie-backdrop-image no-backdrop"></div>
+    {% endif %}
+    <div class="backdrop-text">
+        <div class="centered">
+            <img loading="lazy" src="https://image.tmdb.org/t/p/original{{movie["poster_path"]}}" alt="" class="movie-poster-lg">
+            <span class="movie-title-lg">{{movie["title"]}}</span><br>
+            <span class="movie-info">
+                {% if certification != None %}<span class="certification">{{certification}}</span>{% endif %}
+                {{movie["release_date"]}} (US)
+                • {% for genre in movie["genres"] %} {{genre["name"]}}{{","if not loop.last}}{% endfor %}
+                {% if movie["runtime"] != 0 %}
+                • {{movie["runtime"]}}minutes
+                {% endif %}
+                {% if trailer["results"] != [] %}
+                • <span class="play-trailer"><i class="fas fa-play-circle"></i> Play Trailer</span>
+                {% endif %}
+            </span><br>
+            <div class="backdrop-overview">
+                <span class="movie-overview"><span class="overview">Overview:</span> <br> 
+                <span class="movie-description">{{movie["overview"]}}</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% if trailer["results"] != [] %}
+<div class="videowrapper" key="{{trailer["results"][0]["key"]}}"></div>
+{% endif %}
+<div class="movie-bottom">
+    {% if credits["cast"] %}
+    <div class="credits">
+        <span class="section-title">Cast</span>
+        <a href="/movie/{{movie["id"]}}/cast">
+            <span> • View all cast & crew</span>
+        </a>
+        <div class="movie-section">
+            {% for cast in credits["cast"] %}
+                    {% if loop.index <= 10 %}
+                        <div class="credit-member">
+                            {% if cast["profile_path"] %}
+                                <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{cast["profile_path"]}}" alt="" class="credit-image">
+                            {% else %}
+                                <img loading="lazy" src="/static/images/no-image.JPG" alt="" class="credit-image">
+                            {% endif %}
+                            <div class="credit-names">
+                                <p class="credit-name">{{cast["name"]}}</p>
+                                {% if cast["character"] %}
+                                    <p class="credit-character">{{cast["character"]}}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <div class="blank-cast"></div>
+    {% endif %}
+    {% if recommendations["results"] %}
+        <div class="recommendations">
+            <span class="section-title">Recommendations</span>
+            <div class="movie-section">
+                {% for recommendation in recommendations["results"] %}
+                    {% if recommendation["backdrop_path"] %}
+                        {% if loop.index <= 10%}
+                            <a href="/movie/{{recommendation["id"]}}">
+                                <div class="recommendation">
+                                    <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{recommendation["backdrop_path"]}}" alt="" class="credit-image">
+                                    <p class="recommendation-name">{{recommendation["title"]}}</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="blank-recommendations"></div>
+    {% endif %}
+    <div class="extra-movie-info">
+        {% if movie["homepage"] %}
+        <a href="{{movie["homepage"]}}" class="extra-button" aria-label="Movie Homepage" data-balloon-pos="up">
+            <i class="fas fa-link"></i>
+        </a>
+        {% endif %}
+        {% if g.user %}
+            {% if favorite == False %} 
+                <a href="/movie/{{movie["id"]}}/favorite" class="extra-button" aria-label="Favorite" data-balloon-pos="up">
+                    <i class="fas fa-heart"></i>
+                </a>
+            {% else %}
+                <a href="/movie/{{movie["id"]}}/favorite/remove" class="extra-button" aria-label="Remove From Favorites" data-balloon-pos="up">
+                    <i class="fas fa-heart red-heart"></i>
+                </a>
+            {% endif %}
+            {% if watchlist == False %}
+                <a href="/movie/{{movie["id"]}}/watchlist" class="extra-button" aria-label="Watchlist" data-balloon-pos="up">
+                    <i class="fas fa-bookmark"></i>
+                </a>
+            {% else %}
+                <a href="/movie/{{movie["id"]}}/watchlist/remove" class="extra-button" aria-label="Remove From Watchlist" data-balloon-pos="up">
+                    <i class="fas fa-bookmark blue-watchlist"></i>
+                </a>
+            {% endif %}
+        {% endif %}
+        <p class="extra-title">Status</p>
+        <p>{% if movie["status"] %}
+            {{movie["status"]}}
+            {% else %}
+            -
+            {% endif %}</p>
+        <p class="extra-title">Budget</p>
+        <p>{% if movie["budget"] %}
+            ${{movie["budget"]|numberFormat}}
+            {% else %}
+            -
+            {% endif %}</p>
+        <p class="extra-title">Revenue</p>
+        <p>{% if movie["revenue"] %}
+            ${{movie["revenue"]|numberFormat}}
+            {% else %}
+            -
+            {% endif %}
+        </p>
+    </div>
+    <div class="reviews">
+        {% if reviews %}
+            <p class="user-reviews">User Reviews for {{movie["title"]}}</p>
+            {% if g.user %}
+                <div class="create-review">
+                    <a href="/movie/{{movie["id"]}}/review"><button class="review-button">Create Reivew</button></a>
+                </div>
+            {% endif %}
+            {% for review in reviews %}
+            <div class="review">
+                <div class="review-top">
+                    <p class="review-title">{{review.title}}</p>
+                    <p class="review-rating review-color{{review.rating}}">{{review.rating}} / 10 </p>
+                    <p class="review-date">Created {{review.created|datetimeformat('%b %d, %Y')}}</p>
+                    <p class="review-name">By <a href="/user/{{review.username}}">{{review.username}}</a></p>
+                </div>
+                <div class="review-bottom">
+                    <p class="review-body">{{review.body}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="user-reviews">No reviews for {{movie["title"]}}</p>
+            {% if g.user %}
+            <div class="create-review">
+                <a href="/movie/{{movie["id"]}}/review"><button class="review-button">Create Reivew</button></a>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

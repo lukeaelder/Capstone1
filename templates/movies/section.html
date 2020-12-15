@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="/static/stylesheets/movie-home.css">
+{% endblock %}
+{% block content %}
+<div class="main" data-section="{{section}}">
+    <h2>{% if section == "popular" %}
+            Popular Movies
+        {% elif section == "top_rated" %}
+            Top Rated Movies
+        {% elif section == "now_playing" %}
+            Movies Playing Now
+        {% elif section == "upcoming" %}
+            Upcoming Movies
+        {% endif %}
+        {% if movies %}
+            Results for "{{section}}"
+        {% else %}
+            No results for "{{section}}"
+        {% endif %}
+    </h2>
+    <div class="movie-posters-full upcoming-movies-full">
+        {% for movie in movies %}
+            <a href="/movie/{{movie["id"]}}">
+                <div class="movie-card">
+                    {% if movie["vote_average"] != 0 %}
+                        <div class="rating color{{movie['vote_average']|round(0)|int}}">
+                            <p>{{movie["vote_average"]}}</p>
+                        </div>
+                    {% else %}
+                        <div class="rating color0">
+                            <p>NR</p>
+                        </div>
+                    {% endif %}
+                    {% if movie["poster_path"] %}
+                        <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{movie["poster_path"]}}" alt="" class="movie-poster-full">
+                    {% else %}
+                    <img loading="lazy" src="/static/images/no-image.JPG" alt="" class="movie-poster-full">
+                    {% endif %}
+                    <p class="movie-title">{{movie["title"]}}</p>
+                    <p class="release-date">{{movie["release_date"]}}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+{% endblock %}

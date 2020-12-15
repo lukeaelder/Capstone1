@@ -1,0 +1,95 @@
+.cast-banner {
+    width: 100%;
+    display: flex;
+    margin-left: 5rem;
+    background-image: linear-gradient(to top right, rgb(128, 26, 212), rgb(45,26,212));
+    z-index: -1;
+    line-height: 100px;
+    justify-content: center;
+    min-width: 750px;
+}
+
+.banner-image {
+    border-radius: 10px;
+    width: 95px;
+    margin: .5rem 3rem .5rem 0;
+}
+
+.banner-title {
+    font-size: 2rem;
+    color: white;
+    margin-right: 6rem;
+    white-space: nowrap;
+}
+
+.img {
+    width: 100px;
+    border-radius: 10px;
+    margin: 5px 5px;
+    max-height: 100px;
+    object-fit: cover;
+}
+
+.main {
+    margin-left: 4rem;
+    width: 100%;
+    min-width: 750px;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.member {
+    display: flex;
+    min-width: 280px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.crew{
+    width: 25%;
+    min-width: 300px;
+    border-radius: 10px;
+    margin-top: 5rem;
+    padding-bottom: 0;
+    transform: translate(-6rem, 0);
+}
+
+.cast {
+    width: 25%;
+    min-width: 300px;
+    border-radius: 10px;
+    margin-top: 5rem;
+    transform: translate(-1rem, 0);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.text {
+    display: block;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.role {
+    color: rgb(60,60,60);
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.cast-title {
+    transform: translate(11rem, 0);
+    white-space: nowrap;
+}
+
+.crew-title {
+    transform: translate(7rem, 0);
+    white-space: nowrap;
+}

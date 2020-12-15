@@ -174,24 +174,29 @@ if (top.location.pathname === "/list/new"){
 
     let grid = new Muuri(".grid", {
         dragEnabled: true,
-        dragSort: true
+        dragSort: true,
+        dragStartPredicate: function (item, Event) {
+            if (Event.target.matches(".list-delete-button")) {
+                return false;
+            }
+            return true;
+       }
     });
 
-
-    grid.on("dragEnd", function(){
+    function refreshItems(){
         grid.refreshSortData();
         grid.synchronize();
-        let allGrid = grid.getItems()
-        for (let i = 0; i < allGrid.length; i++){
-            console.log(grid.getItem(i))
-            console.log(i + 1)
-        }
+        grid.refreshItems()
+
+    }
+
+    grid.on("dragEnd", function(){
+        grid.refreshItems()
     })
 
-    $(document).on("dblclick", ".item" ,function(){
-        console.log($(this))
-        grid.remove($(this));
-        $($(this)._child).remove();
+    $(document).on("click", ".list-delete-button" ,function(e){
+        grid.remove(grid.getItems($(this).parents(".item").index()), {removeElements: true})
+        refreshItems();
     });
 
     function appendListItem(movie){
@@ -205,8 +210,10 @@ if (top.location.pathname === "/list/new"){
         item.innerHTML = `<div class="item-content" data-id="${movie.data.id}">
                             ${poster}
                             <p class="list-text">${movie.data.title}</p>
+                            <p class="list-delete-button">X</p>
                         </div>`
         grid.add(item)
+        refreshItems()
     }
 
     $(".create-list-button").on("click", async function(){

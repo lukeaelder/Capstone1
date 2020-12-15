@@ -1,2 +1,2 @@
 # API
-[OMDb API](http://www.omdbapi.com/)
+[The Movie DB API](https://developers.themoviedb.org/)

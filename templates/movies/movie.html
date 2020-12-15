@@ -13,7 +13,7 @@
     {% endif %}
     <div class="backdrop-text">
         <div class="centered">
-            <img loading="lazy" src="https://image.tmdb.org/t/p/original{{movie["poster_path"]}}" alt="" class="movie-poster-lg">
+            <img loading="lazy" src="{% if movie["poster_path"] %}https://image.tmdb.org/t/p/original{{movie["poster_path"]}}{% else %}/static/images/no-image.jpg{% endif %}" alt="" class="movie-poster-lg">
             <span class="movie-title-lg">{{movie["title"]}}</span><br>
             <span class="movie-info">
                 {% if certification != None %}<span class="certification">{{certification}}</span>{% endif %}

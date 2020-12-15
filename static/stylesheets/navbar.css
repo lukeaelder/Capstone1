@@ -55,10 +55,6 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
 }
 
-.nav-item:last-child {
-    margin-top: auto;
-}
-
 .navbar-icon {
     height: 5rem;
     width: 5rem;
@@ -295,6 +291,3 @@ li .dropdown-link .dropdown-title i {
     background-image: linear-gradient(to top right, rgb(73, 214, 45), rgb(12, 223, 213));
     color: black;
 }
-
-
-/* background: linear-gradient(to right, rgb(85, 162, 224), rgb(223, 109, 194)); */

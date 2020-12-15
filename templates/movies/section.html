@@ -13,11 +13,12 @@
             Movies Playing Now
         {% elif section == "upcoming" %}
             Upcoming Movies
-        {% endif %}
-        {% if movies %}
-            Results for "{{section}}"
         {% else %}
-            No results for "{{section}}"
+            {% if movies %}
+                Results for "{{section}}"
+            {% else %}
+                No results for "{{section}}"
+            {% endif %}
         {% endif %}
     </h2>
     <div class="movie-posters-full upcoming-movies-full">

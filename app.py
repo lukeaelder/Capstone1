@@ -43,7 +43,10 @@ def get_results_list(a):
     """Change a list of movies to an easily usable format."""
 
     res = json.loads(a.text)
-    return res["results"]
+    try:
+        return res["results"]
+    except:
+        return False
 
 def get_results(a):
     """Change one movie to a easily useable format."""
@@ -90,10 +93,13 @@ def in_watchlist(movie):
 
 def is_movie(movie):
     """Check if a requested movie is actually a movie."""
-
-    if movie["success"] == False:
+    try:
+        if movie["adult"] == False:
+            return True
+    except:
+        if movie["success"] != False:
+            return True
         return False
-    return True
 
 
 
@@ -111,13 +117,13 @@ def homepage():
 
     return render_template("home.html", upcoming = upcoming, playing = playing, toprated = toprated)
 
-@app.route("/movie/<movie_id>")
+@app.route("/movie/<int:movie_id>")
 def view_movie(movie_id):
     """View one movie including pictures, cast, recommendation, and more information if able to retrieve data."""
 
     movie = get_results(requests.get(f"{api_base}movie/{movie_id}{api_key}"))
     if is_movie(movie) == False:
-        flash("We couldn't fint that movie.")
+        flash("Could not find a movie with that id.")
         return redirect("/")
     trailer = get_results(requests.get(f"{api_base}movie/{movie_id}/videos{api_key}"))
     try:
@@ -145,13 +151,13 @@ def view_movie(movie_id):
     recommendations = recommendations, favorite = is_favorite, watchlist = is_watchlist,
     reviews = reviews)
 
-@app.route("/movie/<movie_id>/cast")
+@app.route("/movie/<int:movie_id>/cast")
 def show_movie_cast(movie_id):
     """Show all cast and crew for a movie."""
 
     movie = get_results(requests.get(f"{api_base}movie/{movie_id}{api_key}"))
     if is_movie(movie) == False:
-        flash("We couldn't fint that movie.")
+        flash("Could not find a movie with that id.")
         return redirect("/")
     movie_credits = get_results(requests.get(f"{api_base}movie/{movie_id}/credits{api_key}"))
 
@@ -162,8 +168,9 @@ def show_upcoming_movies(section):
     """Show all movies for a certain category. Upcoming, now playing, popular, and top rated."""
 
     movies = get_results_list(requests.get(f"{api_base}movie/{section}{api_key}"))
-    if is_movie(movie) == False:
-        flash("We couldn't find that cetegory.")
+    
+    if movies == False:
+        flash("We couldn't find that category.")
         return redirect("/")
 
     return render_template("movies/section.html", movies = movies, section = section)
@@ -181,7 +188,7 @@ def search_movie():
 
     return render_template("movies/section.html", movies = movies, section = query)
 
-@app.route("/movie/<movie_id>/review", methods=["GET", "POST"])
+@app.route("/movie/<int:movie_id>/review", methods=["GET", "POST"])
 def create_movie_review(movie_id):
     """Show a form for a user to create a review for a movie, and add the review to reviews table."""
 
@@ -216,7 +223,7 @@ def create_movie_review(movie_id):
 
 
 
-@app.route("/movie/<movie_id>/favorite")
+@app.route("/movie/<int:movie_id>/favorite")
 def add_favorite(movie_id):
     """Add a movie to a users favorites."""
 
@@ -240,7 +247,7 @@ def add_favorite(movie_id):
         flash("Movie already added to your favorites")
     return redirect(f"/movie/{movie_id}")
 
-@app.route("/movie/<movie_id>/favorite/remove")
+@app.route("/movie/<int:movie_id>/favorite/remove")
 def remove_favorite(movie_id):
     """Remove a movie from a users favorites."""
 
@@ -256,7 +263,7 @@ def remove_favorite(movie_id):
 
     return redirect(f"/movie/{movie_id}")
 
-@app.route("/movie/<movie_id>/watchlist")
+@app.route("/movie/<int:movie_id>/watchlist")
 def add_watchlist(movie_id):
     """Add a movie to a users watchlist."""
 
@@ -280,7 +287,7 @@ def add_watchlist(movie_id):
         flash("Movie already added to your watchlist")
     return redirect(f"/movie/{movie_id}")
 
-@app.route("/movie/<movie_id>/watchlist/remove")
+@app.route("/movie/<int:movie_id>/watchlist/remove")
 def remove_watchlist(movie_id):
     """Remove a movie from a users watchlist."""
 
@@ -479,8 +486,11 @@ def show_list(list_id):
 
 
 
-@app.route("/list/movies", methods=["POST"])
+@app.route("/list/movies", methods=["GET", "POST"])
 def movie_list_search():
+
+    if request.method == "GET":
+        return redirect("/")
 
     query = request.json.get("query")
 
@@ -488,9 +498,12 @@ def movie_list_search():
 
     return jsonify(movies)
 
-@app.route("/movie/section/more", methods=["POST"])
+@app.route("/movie/section/more", methods=["GET", "POST"])
 def more_section_results():
     """Load more movies for a certain section. Now playing, popular, upcoming, and top rated."""
+
+    if request.method == "GET":
+        return redirect("/")
 
     section = request.json.get("section")
     page = request.json.get("page")
@@ -499,9 +512,12 @@ def more_section_results():
     
     return jsonify(movies)
 
-@app.route("/checkmovie", methods=["POST"])
+@app.route("/checkmovie", methods=["GET", "POST"])
 def check_movie():
     """Check if a movie is in the movies table as they get added to list."""
+
+    if request.method == "GET":
+        return redirect("/")
 
     movie_id = request.json.get("movie_id")
 
@@ -510,9 +526,12 @@ def check_movie():
 
     return jsonify(movie)
 
-@app.route("/createlist", methods=["POST"])
+@app.route("/createlist", methods=["GET", "POST"])
 def create_list():
     """Perform creation of a list by a user."""
+
+    if request.method == "GET":
+        return redirect("/")
 
     movies = request.json.get("list")
     title = request.json.get("title")
@@ -556,5 +575,5 @@ def redirect_to_self():
 @app.errorhandler(404)
 def page_not_found(e):
     """Show 404 error page."""
-    
+
     return render_template("404.html")

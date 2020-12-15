@@ -18,8 +18,8 @@ class LoginForm(FlaskForm):
 class ReviewForm(FlaskForm):
     """Form for creating a review."""
 
-    title = StringField('Title', validators=[DataRequired(), Length(max=20)])
-    body = TextAreaField('Review', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired(), Length(max=30)])
+    body = TextAreaField('Review', validators=[DataRequired(), Length(max=200)])
     rating = IntegerField('Rating (1-10)', validators=[DataRequired(), NumberRange(min=1, max=10)])
 
 class UserEditForm(FlaskForm):
@@ -32,5 +32,5 @@ class UserEditForm(FlaskForm):
 class CreateList(FlaskForm):
     """Form for creating a list."""
 
-    title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('(Optional) Description', validators=[Length(max=150)])
+    title = StringField('Title', validators=[DataRequired(), Length(max=30)])
+    description = TextAreaField('(Optional) Description', validators=[Length(max=200)])

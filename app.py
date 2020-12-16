@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify, url_for
 from models import User, Movie, List, ListMovie, Watchlist, Review, db, connect_db, Favorite
 from secrets import secret_key, api_key, api_base
 from sqlalchemy.exc import IntegrityError
@@ -101,6 +101,10 @@ def is_movie(movie):
             return True
         return False
 
+def redirect_url(movie_id):
+    return request.args.get("next") or request.referrer or url_for("view_movie", movie_id=movie_id)
+
+
 
 
 ######################################## Movie routes ##########################################
@@ -137,7 +141,7 @@ def view_movie(movie_id):
         certification = None
     movie_credits = get_results(requests.get(f"{api_base}movie/{movie_id}/credits{api_key}"))
     recommendations = get_results(requests.get(f"{api_base}movie/{movie_id}/recommendations{api_key}"))
-    reviews = db.session.query(Review).filter(Review.movie_id == movie_id).all()
+    reviews = db.session.query(Review).filter(Review.movie_id == movie_id).order_by(Review.id.desc()).all()
 
     if g.user:
         is_favorite = in_favorites(movie)
@@ -245,7 +249,7 @@ def add_favorite(movie_id):
     except:
         db.session.rollback()
         flash("Movie already added to your favorites")
-    return redirect(f"/movie/{movie_id}")
+    return redirect(redirect_url(movie_id))
 
 @app.route("/movie/<int:movie_id>/favorite/remove")
 def remove_favorite(movie_id):
@@ -257,11 +261,11 @@ def remove_favorite(movie_id):
     favorite = db.session.query(Favorite).filter(Favorite.user_id == session[CURR_USER_KEY]).filter(Favorite.movie_id == movie_id).first()
     if not favorite:
         flash("Unable to delete from your favorites")
-        return redirect(request.referrer)
+        return redirect(redirect_url(movie_id))
     db.session.delete(favorite)
     db.session.commit()
 
-    return redirect(f"/movie/{movie_id}")
+    return redirect(redirect_url(movie_id))
 
 @app.route("/movie/<int:movie_id>/watchlist")
 def add_watchlist(movie_id):
@@ -285,7 +289,7 @@ def add_watchlist(movie_id):
     except:
         db.session.rollback()
         flash("Movie already added to your watchlist")
-    return redirect(f"/movie/{movie_id}")
+    return redirect(redirect_url(movie_id))
 
 @app.route("/movie/<int:movie_id>/watchlist/remove")
 def remove_watchlist(movie_id):
@@ -297,12 +301,12 @@ def remove_watchlist(movie_id):
     watchlist = db.session.query(Watchlist).filter(Watchlist.user_id == session[CURR_USER_KEY]).filter(Watchlist.movie_id == movie_id).first()
     if not watchlist:
         flash("Unable to delete from your watchlist")
-        return redirect(request.referrer)
+        return redirect(redirect_url(movie_id))
     
     db.session.delete(watchlist)
     db.session.commit()
 
-    return redirect(f"/movie/{movie_id}")
+    return redirect(redirect_url(movie_id))
 
 
 
@@ -434,12 +438,13 @@ def delete_review(review_id):
     """Delete a review that a user made."""
 
     review = db.session.query(Review).filter(Review.id == review_id).first()
+    movie_id = review.movie_id
     if review.username != g.user.username or not g.user or review == None:
         flash("Access unauthorized.")
         return redirect("/")
     db.session.delete(review)
     db.session.commit()
-    return redirect("/")
+    return redirect(redirect_url(movie_id))
     
 
 @app.route("/list/new", methods=["GET", "POST"])
@@ -479,6 +484,19 @@ def show_list(list_id):
     user = db.session.query(User.username).join(List).filter(User.id == List.user_id).first()
 
     return render_template("lists/list.html", movies = movies, list = lists, user = user)
+
+@app.route("/list/<list_id>/delete")
+def delete_list(list_id):
+    if not g.user:
+        flash("Access unauthorized.")
+        return redirect("/")
+    lists = db.session.query(List).filter(List.id == list_id).first()
+    if lists.user_id != session[CURR_USER_KEY] or not g.user or lists == None:
+        flash("Access unauthorized.")
+        return redirect("/")
+    db.session.delete(lists)
+    db.session.commit()
+    return redirect(f"/user/{g.user.username}")
 
 
 

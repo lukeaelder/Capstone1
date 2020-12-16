@@ -39,33 +39,46 @@
     </div>
     <div class="user-section">
         <div class="user-lists {% if request.args.get("fav") %}hide{% else %}show{% endif%}">
-            {% for list in lists %}
-                <a href="/list/{{list.id}}">
-                    <div class="user-list">
-                        {% if list.image %}
-                            <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{list.image}}" alt="" class="list-image">
-                        {% else %}
-                            <div class="no-list-image"></div>
-                        {% endif %}
-                        <p class="list-title">{{list.title}}</p>
-                        <p class="list-created">Created {{list.created|datetimeformat('%b %d, %Y')}}</p>
-                    </div>
-                </a>
-            {% endfor %}
+            {% if lists %}
+                {% for list in lists %}
+                    <a href="/list/{{list.id}}">
+                        <div class="user-list">
+                            {% if list.image %}
+                                <img loading="lazy" src="https://image.tmdb.org/t/p/w500{{list.image}}" alt="" class="list-image">
+                            {% else %}
+                                <div class="no-list-image"></div>
+                            {% endif %}
+                            <p class="list-title">{{list.title}}</p>
+                            <p class="list-created">Created {{list.created|datetimeformat('%b %d, %Y')}}</p>
+                            {% if g.user.id == user.id %}
+                            <form action="/list/{{list.id}}/delete">
+                                <button class="delete-list-button">X</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="no-section-list">{{user.username}} has no lists</p>
+            {% endif %}
         </div>
     </div>
     <div class="user-section">
         <div class="user-favorites {% if request.args.get("fav") %}show{% else %}hide{% endif%}">
-            {% for favorite in favorites %}
-                <a href="/movie/{{favorite.movie_id}}">
-                    <div class="user-favorite">
-                        <img loading="lazy" src="{% if favorite.backdrop_image %}https://image.tmdb.org/t/p/w500/{{favorite.backdrop_image}}{% else %}/static/images/no-image.JPG{% endif %}" alt="" class="favorite-image">
-                        <div class="favorite-text">
-                            <p class="favorite-title">{{favorite.title}}</p>
+            {% if favorites %}    
+                {% for favorite in favorites %}
+                    <a href="/movie/{{favorite.movie_id}}">
+                        <div class="user-favorite">
+                            <img loading="lazy" src="{% if favorite.backdrop_image %}https://image.tmdb.org/t/p/w500/{{favorite.backdrop_image}}{% else %}/static/images/no-image.JPG{% endif %}" alt="" class="favorite-image">
+                            <div class="favorite-text">
+                                <p class="favorite-title">{{favorite.title}}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            {% endfor %}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="no-section-fav">{{user.username}} has no favorites</p>
+            {% endif %}
         </div>
     </div>
 </div>

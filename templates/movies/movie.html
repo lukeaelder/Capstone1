@@ -148,6 +148,9 @@
                     <p class="review-rating review-color{{review.rating}}">{{review.rating}} / 10 </p>
                     <p class="review-date">Created {{review.created|datetimeformat('%b %d, %Y')}}</p>
                     <p class="review-name">By <a href="/user/{{review.username}}">{{review.username}}</a></p>
+                    {% if review.username == g.user.username %}
+                        <a href="/reviews/{{review.id}}/delete"><button class="delete-review">Delete</button></a>
+                    {% endif %}
                 </div>
                 <div class="review-bottom">
                     <p class="review-body">{{review.body}}</p>

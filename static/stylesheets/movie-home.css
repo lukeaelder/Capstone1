@@ -453,3 +453,14 @@ body {
     color: black;
     background-image: linear-gradient(to top right, rgb(73, 214, 45), rgb(12, 223, 213));
 }
+
+.delete-review {
+    transform: translateY(-5px);
+    border-radius: 5px;
+    background-image: linear-gradient(to top right, rgb(236, 139, 59), rgb(243, 57, 44));
+    color: white;
+}
+
+.delete-review:hover {
+    cursor: pointer;
+}

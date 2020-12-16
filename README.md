@@ -10,7 +10,7 @@
   </p>
 </p>
 
-<img src="static/images/homescreen.png" width="425"/> <img src="static/images/moviepage.png" width="425"/> 
+<img src="static/images/homescreen.png" width="49%"/> <img src="static/images/moviepage.png" width="49%"/> 
 
 ## About the project
 

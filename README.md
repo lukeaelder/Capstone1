@@ -6,7 +6,7 @@
   <p align="center">
     A website where users can view movie information, create movie list, favorite and watchlist movies, and leave reviews.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Heroku Demo</a>
+    <a href="https://movierandl.herokuapp.com/">View Heroku Demo</a>
   </p>
 </p>
 
